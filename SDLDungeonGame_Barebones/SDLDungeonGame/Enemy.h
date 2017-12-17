@@ -6,6 +6,6 @@ namespace DungeonGame
 	class Enemy : public Sprite
 	{
 	public:
-		void Initialize(SDL_Renderer* pRenderer);
+		void InitEnemy(SDL_Renderer* pRenderer);
 	};
 }
