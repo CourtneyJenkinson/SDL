@@ -6,12 +6,12 @@ void Item::InitItem(SDL_Renderer* pRenderer, ItemData* pItemData)
 {
 	m_pItemData = pItemData;
 
-	std::string textureFilename = "Tex_Egg.bmp";
+	std::string textureFilename = "Assets/Tex_Egg.bmp";
 
 	switch (m_pItemData->type)
 	{
 	case ITEM_Egg:
-		textureFilename = "Tex_Egg.bmp";
+		textureFilename = "Assets/Tex_Egg.bmp";
 		break;
 	}
 

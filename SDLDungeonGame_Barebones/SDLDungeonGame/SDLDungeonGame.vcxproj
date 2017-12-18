@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bullet.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="Hero.h" />
@@ -27,6 +28,7 @@
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameCore.cpp" />
     <ClCompile Include="Hero.cpp" />

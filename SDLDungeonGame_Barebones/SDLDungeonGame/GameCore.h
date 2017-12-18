@@ -106,6 +106,14 @@ namespace DungeonGame
 		bool bAlive;
 	};
 
+	struct BulletData
+	{
+		Vector2d position;
+		Vector2d direction;
+		float bulletLifeTime;
+		bool bAlive;
+	};
+
 	class PlayerState
 	{
 	public:
@@ -115,11 +123,16 @@ namespace DungeonGame
 		bool ItemToPlayerCollision(ItemData* itemSprite);
 
 		bool m_bHasFinishedGame;
+		bool m_bWantsToShot;
 
 		Vector2d m_CurrentPosition;
 		Vector2d m_DesiredDirection;
 
 		std::vector<ItemType> m_Inventory;
+
+		std::vector<BulletData> m_Bullet;
+
+		float m_ShotCooldownSec;
 
 	};
 
@@ -130,6 +143,8 @@ namespace DungeonGame
 		void Reset();
 
 		unsigned int GetTileTypeAtPosition(const Vector2d& inPosition);
+
+		bool BulletCollWithItem(BulletData* pBullet);
 
 		//tile setup
 		unsigned int m_TilesPerRow;

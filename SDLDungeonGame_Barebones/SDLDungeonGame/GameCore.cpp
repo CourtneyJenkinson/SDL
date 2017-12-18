@@ -4,17 +4,25 @@
 #include "Hero.h"
 #include "RoomRender.h"
 #include "Item.h"
+#include "Bullet.h"
 
 namespace DungeonGame
 {
 	//Makes Background
 	std::vector<Sprite*> g_spriteList;
 	Vector2d cameraPosition;
+	const unsigned int BULLET_COUNT = 3;
 
 
 	void PlayerState::Initialize()
 	{
-		//TODO: Initialize PlayerState stuff here
+		for (unsigned int i = 0; i < BULLET_COUNT; i++)
+		{
+			BulletData bullet = {};
+			bullet.bAlive = false;
+			m_Bullet.push_back(bullet);
+
+		}
 
 		Reset();
 	}
@@ -24,8 +32,9 @@ namespace DungeonGame
 		//Set spawn point
 		m_CurrentPosition = Vector2d(2.0f * 64.0f, 1.0f * 64.0f);
 
-
+		m_bWantsToShot = false;
 		m_bHasFinishedGame = false;
+		m_ShotCooldownSec - 0.0f;
 	}
 
 	bool PlayerState::ItemToPlayerCollision(ItemData* itemSprite)
@@ -90,6 +99,26 @@ namespace DungeonGame
 		return 1;
 	}
 
+	bool WorldState::BulletCollWithItem(BulletData* pBullet)
+	{
+		bool bHasCollided = false;
+		for (unsigned int i = 0; i < m_Item.size(); i++)
+		{
+			ItemData& currItem = m_Item[i];
+			//makes a vector from bullet to item
+			Vector2d itemToBullet = pBullet->position - currItem.position;
+			//gets the distance of the vector
+			float distance = itemToBullet.GetLength();
+			//returns true if bullet is less than 16 pixels of an item
+			 bHasCollided = distance < 32.0f;
+			if (bHasCollided)
+			{
+				bHasCollided = true;
+				break;
+			}
+		}
+		return bHasCollided;
+	}
 
 	void InitializeGame(SDL_Renderer* pRenderer, WorldState& worldState, PlayerState& playerState)
 	{
@@ -122,6 +151,14 @@ namespace DungeonGame
 			Item* itemSprite = new Item;
 			itemSprite->InitItem(pRenderer, &worldState.m_Item[i]);
 			g_spriteList.push_back(itemSprite);
+		}
+
+		//Load Bullets
+		for (unsigned int i = 0; i < playerState.m_Bullet.size(); i++)
+		{
+			Bullet* bulletSprite = new Bullet;
+			bulletSprite->InitBullet(pRenderer, &playerState.m_Bullet[i]);
+			g_spriteList.push_back(bulletSprite);
 		}
 
 
@@ -164,6 +201,9 @@ namespace DungeonGame
 				case SDLK_LEFT:
 					playerState.m_DesiredDirection.X = -1.0f;
 					break;
+				case SDLK_SPACE:
+					playerState.m_bWantsToShot = true;
+					break;
 				}
 			}
 			else if (e.type == SDL_KEYUP)
@@ -178,6 +218,9 @@ namespace DungeonGame
 				case SDLK_RIGHT:
 				case SDLK_LEFT:
 					playerState.m_DesiredDirection.X = 0.0f;
+					break;
+				case SDLK_SPACE:
+					playerState.m_bWantsToShot = false;
 					break;
 				}
 			}
