@@ -7,6 +7,9 @@ namespace DungeonGame
 	const float WINDOW_WIDTH = 1280.0f;
 	const float WINDOW_HEIGHT = 720.0f;
 
+	const float TILE_SIZE_W = 64.0f;
+	const float TILE_SIZE_H = 64.0f;
+
 	struct Vector2d
 	{
 		float X;
@@ -109,6 +112,8 @@ namespace DungeonGame
 	public:
 		void Initialize();
 		void Reset();
+
+		unsigned int GetTileTypeAtPosition(const Vector2d& inPosition);
 
 		//tile setup
 		unsigned int m_TilesPerRow;

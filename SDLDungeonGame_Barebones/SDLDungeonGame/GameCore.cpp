@@ -19,6 +19,7 @@ namespace DungeonGame
 	void PlayerState::Reset()
 	{
 		//TODO: Reseet PlayerState stuff to default values
+		m_CurrentPosition = Vector2d(2.0f * 64.0f, 1.0f * 64.0f);
 
 		m_bHasFinishedGame = false;
 	}
@@ -47,6 +48,21 @@ namespace DungeonGame
 	{
 		//TODO: Reseet WorldState stuff to default values
 	}
+
+	unsigned int WorldState::GetTileTypeAtPosition(const Vector2d& inPosition)
+	{
+		int col = (int)(inPosition.X / 64.0f);
+		int row = (int)(inPosition.Y / 64.0f);
+
+		int index = row * m_TilesPerRow + col;
+		if (index >= 0 && index < m_Tiles.size())
+		{
+			return m_Tiles[index];
+		}
+
+		return 1;
+	}
+
 
 	void InitializeGame(SDL_Renderer* pRenderer, WorldState& worldState, PlayerState& playerState)
 	{

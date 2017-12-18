@@ -11,6 +11,12 @@ void Hero::InitHero(SDL_Renderer* pRenderer)
  void Hero::Update(float deltaSeconds, WorldState& worldState, PlayerState& playerState)
 {
 	 const float HERO_PIXELS_PER_SECOND = 300.0f * deltaSeconds;
-	 playerState.m_CurrentPosition = playerState.m_CurrentPosition + playerState.m_DesiredDirection * HERO_PIXELS_PER_SECOND;
-	 m_Position = playerState.m_CurrentPosition;
+	 Vector2d newPosition = playerState.m_CurrentPosition + playerState.m_DesiredDirection * HERO_PIXELS_PER_SECOND;
+	 if (worldState.GetTileTypeAtPosition(newPosition) == 1)
+	 {
+		playerState.m_CurrentPosition = newPosition;
+	 }
+	 
+	 //m_Position = playerState.m_CurrentPosition;
+	 m_Position = playerState.m_CurrentPosition + Vector2d(m_Size.X * 0.5f, m_Size.Y * 0.85f);
 }

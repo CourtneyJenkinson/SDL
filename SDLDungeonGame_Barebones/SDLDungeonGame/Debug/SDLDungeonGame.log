@@ -1,4 +1,7 @@
-﻿  RoomRender.cpp
+﻿  Hero.cpp
+  GameCore.cpp
+e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\gamecore.cpp(58): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
   SDLDungeonGame.vcxproj -> E:\Class\GAME399_C++\SDLProject\SDLDungeonGame_Barebones\Debug\SDLDungeonGame.exe
   0 File(s) copied
   0 File(s) copied
