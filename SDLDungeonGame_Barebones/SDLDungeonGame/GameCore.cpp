@@ -7,9 +7,6 @@ namespace DungeonGame
 {
 	//Makes Background
 	std::vector<Sprite*> g_spriteList;
-	//Sprite backgroundSprite;  
-	//Enemy enemySprite;
-	//Hero heroSprite;
 
 	void PlayerState::Initialize()
 	{
@@ -52,14 +49,14 @@ namespace DungeonGame
 
 		
 		//Load enemy Sprite
-		Sprite* enemySprite = new Enemy;
+		Enemy* enemySprite = new Enemy;
 		enemySprite->Initialize(Sprite::LoadTexture(pRenderer, "Assets/Tex_Ant.bmp"));
 		enemySprite->m_Size = Vector2d(64, 64);
 		g_spriteList.push_back(enemySprite);
 
 
 		//Load Hero Sprite
-		Sprite* heroSprite = new Hero;
+		Hero* heroSprite = new Hero;
 		heroSprite->Initialize(Sprite::LoadTexture(pRenderer, "Assets/Tex_Wasp.bmp"));
 		heroSprite->m_Size = Vector2d(128, 128);
 		g_spriteList.push_back(heroSprite);
@@ -68,6 +65,8 @@ namespace DungeonGame
 
 	void GetInput(const WorldState& worldState, PlayerState& playerState)
 	{
+		
+
 		SDL_Event e = {};
 		while (SDL_PollEvent(&e) != 0)
 		{
@@ -83,6 +82,33 @@ namespace DungeonGame
 				case SDLK_ESCAPE:
 					playerState.m_bHasFinishedGame = true;
 					break;
+				case SDLK_UP:
+					playerState.m_DesiredDirection.Y = -1.0f;
+					break;
+				case SDLK_DOWN:
+					playerState.m_DesiredDirection.Y = 1.0f;
+					break;
+				case SDLK_RIGHT:
+					playerState.m_DesiredDirection.X = 1.0f;
+					break;
+				case SDLK_LEFT:
+					playerState.m_DesiredDirection.X = -1.0f;
+					break;
+				}
+			}
+			else if (e.type == SDL_KEYUP)
+			{
+				auto keyCode = e.key.keysym.sym;
+				switch (keyCode)
+				{
+				case SDLK_UP:
+				case SDLK_DOWN:
+					playerState.m_DesiredDirection.Y = 0.0f;
+					break;
+				case SDLK_RIGHT:
+				case SDLK_LEFT:
+					playerState.m_DesiredDirection.X = 0.0f;
+					break;
 				}
 			}
 		}
@@ -94,7 +120,6 @@ namespace DungeonGame
 		{
 			g_spriteList[i]->Update(deltaSeconds, worldState, playerState);
 		}
-	
 		
 	}
 

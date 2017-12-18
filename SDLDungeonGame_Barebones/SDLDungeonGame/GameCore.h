@@ -98,6 +98,10 @@ namespace DungeonGame
 		void Reset();
 
 		bool m_bHasFinishedGame;
+
+		Vector2d m_CurrentPosition;
+		Vector2d m_DesiredDirection;
+
 	};
 
 	class WorldState
