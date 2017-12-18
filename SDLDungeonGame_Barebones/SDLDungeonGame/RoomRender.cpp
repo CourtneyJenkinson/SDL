@@ -34,8 +34,8 @@ void RoomRender::Render(SDL_Renderer *pRenderer, const WorldState& worldState, c
 		{
 			SDL_Rect destRect =
 			{
-				columnsRendered * 64,	//x
-				rowsRendered * 64,	//y
+				columnsRendered * 64 + baseTransformation.X,	//x
+				rowsRendered * 64 + baseTransformation.Y,	//y
 				64,	//w
 				64, 	//h
 			};

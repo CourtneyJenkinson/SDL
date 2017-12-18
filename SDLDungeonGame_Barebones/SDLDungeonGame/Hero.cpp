@@ -18,5 +18,6 @@ void Hero::InitHero(SDL_Renderer* pRenderer)
 	 }
 	 
 	 //m_Position = playerState.m_CurrentPosition;
-	 m_Position = playerState.m_CurrentPosition + Vector2d(m_Size.X * 0.5f, m_Size.Y * 0.85f);
+	 //Boundary
+	 m_Position = playerState.m_CurrentPosition + Vector2d(m_Size.X, m_Size.Y);
 }

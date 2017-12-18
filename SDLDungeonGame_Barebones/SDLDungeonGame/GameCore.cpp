@@ -8,6 +8,8 @@ namespace DungeonGame
 {
 	//Makes Background
 	std::vector<Sprite*> g_spriteList;
+	Vector2d cameraPosition;
+
 
 	void PlayerState::Initialize()
 	{
@@ -68,6 +70,7 @@ namespace DungeonGame
 	{
 		worldState.Initialize();
 		playerState.Initialize();
+		cameraPosition = Vector2d(); 
 
 		
 		//Load Background Sprite
@@ -154,7 +157,7 @@ namespace DungeonGame
 		{
 			g_spriteList[i]->Update(deltaSeconds, worldState, playerState);
 		}
-		
+		cameraPosition = Vector2d(WINDOW_WIDTH * 0.5f, WINDOW_HEIGHT * 0.5f) - playerState.m_CurrentPosition;
 	}
 
 	void RenderGame(SDL_Renderer* pRenderer, const WorldState& worldState, const PlayerState& playerState)
@@ -163,7 +166,7 @@ namespace DungeonGame
 
 		for (unsigned int i = 0; i < g_spriteList.size(); i++)
 		{
-			g_spriteList[i]->Render(pRenderer, worldState, playerState);
+			g_spriteList[i]->Render(pRenderer, worldState, playerState, cameraPosition);
 		}
 
 		SDL_RenderPresent(pRenderer);
