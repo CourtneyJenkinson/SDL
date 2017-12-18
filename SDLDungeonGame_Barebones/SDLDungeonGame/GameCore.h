@@ -109,6 +109,10 @@ namespace DungeonGame
 	public:
 		void Initialize();
 		void Reset();
+
+		//tile setup
+		unsigned int m_TilesPerRow;
+		std::vector<unsigned int> m_Tiles;
 	};
 
 	void InitializeGame(SDL_Renderer* pRenderer, WorldState& worldState, PlayerState& playerState);

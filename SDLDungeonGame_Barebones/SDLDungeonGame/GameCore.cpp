@@ -2,6 +2,7 @@
 #include "Sprite.h"
 #include "Enemy.h"
 #include "Hero.h"
+#include "RoomRender.h"
 
 namespace DungeonGame
 {
@@ -27,6 +28,17 @@ namespace DungeonGame
 	void WorldState::Initialize()
 	{
 		//TODO: Initialize WorldState stuff here
+		m_TilesPerRow = 8;
+		m_Tiles =
+		{
+			0,2,2,2,2,2,2,0,
+			0,2,1,1,1,1,2,0,
+			0,2,1,1,1,1,2,0,
+			0,2,1,1,1,1,2,0,
+			0,2,1,1,1,1,2,0,
+			0,2,1,1,1,1,2,0,
+			0,2,2,2,2,2,2,0
+		};
 
 		Reset();
 	}
@@ -41,12 +53,18 @@ namespace DungeonGame
 		worldState.Initialize();
 		playerState.Initialize();
 
+		
 		//Load Background Sprite
 		Sprite* backgroundSprite = new Sprite;
 		backgroundSprite->Initialize(Sprite::LoadTexture(pRenderer, "Assets/background.bmp"));
 		backgroundSprite->m_Size = Vector2d(WINDOW_WIDTH, WINDOW_HEIGHT);
 		g_spriteList.push_back(backgroundSprite);
 
+
+		//Load Room
+		RoomRender* roomSprite = new RoomRender;
+		roomSprite->InitRoom(pRenderer);
+		g_spriteList.push_back(roomSprite);
 		
 		//Load enemy Sprite
 		Enemy* enemySprite = new Enemy;

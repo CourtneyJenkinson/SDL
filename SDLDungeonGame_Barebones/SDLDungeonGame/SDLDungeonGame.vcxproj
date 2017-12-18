@@ -22,6 +22,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="GameCore.h" />
     <ClInclude Include="Hero.h" />
+    <ClInclude Include="RoomRender.h" />
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
@@ -29,6 +30,7 @@
     <ClCompile Include="GameCore.cpp" />
     <ClCompile Include="Hero.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RoomRender.cpp" />
     <ClCompile Include="Sprite.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
