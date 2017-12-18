@@ -1,6 +1,6 @@
 ﻿  GameCore.cpp
-e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\gamecore.cpp(37): warning C4552: '-': operator has no effect; expected operator with side-effect
-e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\gamecore.cpp(94): warning C4018: '<': signed/unsigned mismatch
+e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\gamecore.cpp(39): warning C4552: '-': operator has no effect; expected operator with side-effect
+e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\gamecore.cpp(105): warning C4018: '<': signed/unsigned mismatch
   SDLDungeonGame.vcxproj -> E:\Class\GAME399_C++\SDLProject\SDLDungeonGame_Barebones\Debug\SDLDungeonGame.exe
   0 File(s) copied
   0 File(s) copied

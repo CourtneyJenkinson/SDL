@@ -106,6 +106,17 @@ namespace DungeonGame
 		bool bAlive;
 	};
 
+	struct EnemyData
+	{
+		Vector2d m_CurrentPosition;
+		int m_Hp;
+		bool bAlive;
+		std::vector<Vector2d> NavPoints; 
+		unsigned int CurrNavPointIndex;
+
+		//void hit by bullet
+	};
+
 	struct BulletData
 	{
 		Vector2d position;
@@ -127,6 +138,8 @@ namespace DungeonGame
 
 		Vector2d m_CurrentPosition;
 		Vector2d m_DesiredDirection;
+
+		int m_HP;
 
 		std::vector<ItemType> m_Inventory;
 
@@ -151,6 +164,7 @@ namespace DungeonGame
 		std::vector<unsigned int> m_Tiles;
 
 		std::vector<ItemData> m_Item;
+		std::vector<EnemyData> m_Enemy;
 	};
 
 	void InitializeGame(SDL_Renderer* pRenderer, WorldState& worldState, PlayerState& playerState);

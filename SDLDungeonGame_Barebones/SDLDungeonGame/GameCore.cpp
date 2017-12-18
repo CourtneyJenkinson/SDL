@@ -32,6 +32,8 @@ namespace DungeonGame
 		//Set spawn point
 		m_CurrentPosition = Vector2d(2.0f * 64.0f, 1.0f * 64.0f);
 
+		m_HP = 5;
+
 		m_bWantsToShot = false;
 		m_bHasFinishedGame = false;
 		m_ShotCooldownSec - 0.0f;
@@ -77,12 +79,21 @@ namespace DungeonGame
 		item2.position = Vector2d(4.0f *64.0f, 3.0f *64.0f);
 		m_Item.push_back(item2);
 
+			//Adds Enemy to list
+		EnemyData enemy1 = {};
+		enemy1.bAlive = true;
+		enemy1.m_Hp = 1;
+		enemy1.m_CurrentPosition = Vector2d(1.0f *64.0f, 1.0f *64.0f);
+		//enemy1.NavPoints.push_back(5.0f *64.0f, 1.0f *64.0f);
+		m_Enemy.push_back(enemy1);
+
 		Reset();
 	}
 
 	void WorldState::Reset()
 	{
 		//TODO: Reseet WorldState stuff to default values
+
 	}
 
 	unsigned int WorldState::GetTileTypeAtPosition(const Vector2d& inPosition)
@@ -140,10 +151,13 @@ namespace DungeonGame
 		g_spriteList.push_back(roomSprite);
 		
 		//Load enemy Sprite
-		Enemy* enemySprite = new Enemy;
-		enemySprite->InitEnemy(pRenderer);
-		enemySprite->m_Size = Vector2d(64, 64);
-		g_spriteList.push_back(enemySprite);
+		for (unsigned int i = 0; i < worldState.m_Enemy.size(); i++)
+		{
+			Enemy* enemySprite = new Enemy;
+			enemySprite->InitEnemy(pRenderer, &worldState.m_Enemy[i]);
+			enemySprite->m_Size = Vector2d(64, 64);
+			g_spriteList.push_back(enemySprite);
+		}
 
 		//Load Items
 		for (unsigned int i = 0; i < worldState.m_Item.size(); i++)

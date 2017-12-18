@@ -32,8 +32,6 @@ void Hero::InitHero(SDL_Renderer* pRenderer)
 			 playerState.m_ShotCooldownSec = 0.0f;
 		 }
 
-
-
 		 if (playerState.m_bWantsToShot)
 		 {
 			 TryToShot(playerState);

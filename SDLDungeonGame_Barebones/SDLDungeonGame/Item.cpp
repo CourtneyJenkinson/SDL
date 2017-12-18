@@ -19,6 +19,8 @@ void Item::InitItem(SDL_Renderer* pRenderer, ItemData* pItemData)
 
 	m_Size = Vector2d(32, 32);
 }
+
+//offsets collision
 void Item::Update(float deltaSeconds, WorldState& worldState, PlayerState& playerState) 
 {
 	m_Position = m_pItemData->position - m_Size * 0.5f;
