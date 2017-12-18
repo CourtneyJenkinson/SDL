@@ -3,6 +3,7 @@
 #include "Enemy.h"
 #include "Hero.h"
 #include "RoomRender.h"
+#include "Item.h"
 
 namespace DungeonGame
 {
@@ -20,10 +21,21 @@ namespace DungeonGame
 
 	void PlayerState::Reset()
 	{
-		//TODO: Reseet PlayerState stuff to default values
+		//Set spawn point
 		m_CurrentPosition = Vector2d(2.0f * 64.0f, 1.0f * 64.0f);
 
+
 		m_bHasFinishedGame = false;
+	}
+
+	bool PlayerState::ItemToPlayerCollision(ItemData* itemSprite)
+	{
+		//makes a vector from player to item
+		Vector2d itemToPlayer = itemSprite->position - m_CurrentPosition;
+		//gets the distance of the vector
+		float distance = itemToPlayer.GetLength();
+		//returns turn if player is less than 16 pixels of an item
+		return distance < 64.0f;
 	}
 
 	
@@ -42,6 +54,19 @@ namespace DungeonGame
 			0,2,1,1,1,1,2,0,
 			0,2,2,2,2,2,2,0
 		};
+
+		//Adds Item to list
+		ItemData item1 = {};
+		item1.bAlive = true;
+		item1.type = ITEM_Egg;
+		item1.position = Vector2d(3.0f *64.0f, 3.0f *64.0f);
+		m_Item.push_back(item1);
+
+		ItemData item2 = {};
+		item2.type = ITEM_Egg;
+		item2.bAlive = true;
+		item2.position = Vector2d(4.0f *64.0f, 3.0f *64.0f);
+		m_Item.push_back(item2);
 
 		Reset();
 	}
@@ -87,14 +112,22 @@ namespace DungeonGame
 		
 		//Load enemy Sprite
 		Enemy* enemySprite = new Enemy;
-		enemySprite->Initialize(Sprite::LoadTexture(pRenderer, "Assets/Tex_Ant.bmp"));
+		enemySprite->InitEnemy(pRenderer);
 		enemySprite->m_Size = Vector2d(64, 64);
 		g_spriteList.push_back(enemySprite);
+
+		//Load Items
+		for (unsigned int i = 0; i < worldState.m_Item.size(); i++)
+		{
+			Item* itemSprite = new Item;
+			itemSprite->InitItem(pRenderer, &worldState.m_Item[i]);
+			g_spriteList.push_back(itemSprite);
+		}
 
 
 		//Load Hero Sprite
 		Hero* heroSprite = new Hero;
-		heroSprite->Initialize(Sprite::LoadTexture(pRenderer, "Assets/Tex_Wasp.bmp"));
+		heroSprite->InitHero(pRenderer);
 		heroSprite->m_Size = Vector2d(128, 128);
 		g_spriteList.push_back(heroSprite);
 	

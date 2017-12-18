@@ -94,16 +94,32 @@ namespace DungeonGame
 		}
 	};
 
+	enum ItemType
+	{
+		ITEM_Egg
+	};
+
+	struct ItemData
+	{
+		ItemType type;
+		Vector2d position;
+		bool bAlive;
+	};
+
 	class PlayerState
 	{
 	public:
 		void Initialize();
 		void Reset();
 
+		bool ItemToPlayerCollision(ItemData* itemSprite);
+
 		bool m_bHasFinishedGame;
 
 		Vector2d m_CurrentPosition;
 		Vector2d m_DesiredDirection;
+
+		std::vector<ItemType> m_Inventory;
 
 	};
 
@@ -118,6 +134,8 @@ namespace DungeonGame
 		//tile setup
 		unsigned int m_TilesPerRow;
 		std::vector<unsigned int> m_Tiles;
+
+		std::vector<ItemData> m_Item;
 	};
 
 	void InitializeGame(SDL_Renderer* pRenderer, WorldState& worldState, PlayerState& playerState);

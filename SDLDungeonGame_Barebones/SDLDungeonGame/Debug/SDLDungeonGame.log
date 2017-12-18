@@ -1,10 +1,5 @@
-﻿  RoomRender.cpp
-e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\roomrender.cpp(41): warning C4838: conversion from 'float' to 'int' requires a narrowing conversion
-e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\roomrender.cpp(37): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\roomrender.cpp(38): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
-  GameCore.cpp
-e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\gamecore.cpp(60): warning C4018: '<': signed/unsigned mismatch
-  Generating Code...
+﻿  GameCore.cpp
+e:\class\game399_c++\sdlproject\sdldungeongame_barebones\sdldungeongame\gamecore.cpp(85): warning C4018: '<': signed/unsigned mismatch
   SDLDungeonGame.vcxproj -> E:\Class\GAME399_C++\SDLProject\SDLDungeonGame_Barebones\Debug\SDLDungeonGame.exe
   0 File(s) copied
   0 File(s) copied
