@@ -3,6 +3,14 @@
 
 namespace DungeonGame
 {
+	enum EnemyState
+	{
+		EnemyState_None,
+		EnemyState_Idle,
+		EnemyState_Agro,
+		EnemyState_Return
+	};
+
 	class Enemy : public Sprite
 	{
 	public:
@@ -11,6 +19,9 @@ namespace DungeonGame
 		virtual void Update(float deltaSeconds, WorldState& worldState, PlayerState& playerState);
 
 	private:
+		void SetEnemyState(EnemyState newEnemyState);
+		Vector2d m_SpawnPoint;
 		EnemyData* m_pEnemyData;
+		EnemyState m_pEnemyState;
 	};
 }

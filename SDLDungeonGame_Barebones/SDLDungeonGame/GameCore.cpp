@@ -13,6 +13,14 @@ namespace DungeonGame
 	Vector2d cameraPosition;
 	const unsigned int BULLET_COUNT = 3;
 
+	void EnemyData::OnHitByBullet(BulletData* pBullet)
+	{
+		EnemyHp--;
+		if (EnemyHp <= 0)
+		{
+			bAlive = false;
+		}
+	}
 
 	void PlayerState::Initialize()
 	{
@@ -54,17 +62,31 @@ namespace DungeonGame
 	void WorldState::Initialize()
 	{
 		//TODO: Initialize WorldState stuff here
-		m_TilesPerRow = 8;
+		m_TilesPerRow = 48;
 		m_Tiles =
 		{
-			0,2,2,2,2,2,2,0,
-			0,2,1,1,1,1,2,0,
-			0,2,1,1,1,1,2,0,
-			0,2,1,1,1,1,2,0,
-			0,2,1,1,1,1,2,0,
-			0,2,1,1,1,1,2,0,
-			0,2,2,2,2,2,2,0
-		};
+			0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+			0,2,1,1,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,2,
+			0,2,1,1,1,1,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,2,
+			0,2,1,1,1,1,2,2,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+			0,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,
+			0,2,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,2,
+			0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,2,
+			0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,2,
+			0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,1,1,1,2,
+			0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,0,0,0,0,2,1,1,1,2,
+			0,2,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,2,0,0,0,0,2,1,1,1,2,
+			0,2,1,1,1,2,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,2,0,0,0,0,2,1,1,1,2,
+			0,2,1,1,1,2,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,1,2,0,0,0,0,2,1,1,1,2,
+			0,2,1,1,1,2,0,0,0,0,0,0,0,0,2,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,2,1,1,1,2,0,0,0,0,2,1,1,1,2,
+			0,2,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,2,1,1,1,2,2,2,2,2,2,1,1,1,2,
+			0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,
+			0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,
+			0,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,2,
+			0,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,
+
+		}; 
+
 
 		//Adds Item to list
 		ItemData item1 = {};
@@ -82,8 +104,8 @@ namespace DungeonGame
 			//Adds Enemy to list
 		EnemyData enemy1 = {};
 		enemy1.bAlive = true;
-		enemy1.m_Hp = 1;
-		enemy1.m_CurrentPosition = Vector2d(1.0f *64.0f, 1.0f *64.0f);
+		enemy1.EnemyHp = 3;
+		enemy1.m_CurrentPosition = Vector2d(5.0f *64.0f, 3.0f *64.0f);
 		//enemy1.NavPoints.push_back(5.0f *64.0f, 1.0f *64.0f);
 		m_Enemy.push_back(enemy1);
 
@@ -110,6 +132,7 @@ namespace DungeonGame
 		return 1;
 	}
 
+	
 	bool WorldState::BulletCollWithItem(BulletData* pBullet)
 	{
 		bool bHasCollided = false;
@@ -124,6 +147,29 @@ namespace DungeonGame
 			 bHasCollided = distance < 32.0f;
 			if (bHasCollided)
 			{
+				bHasCollided = true;
+				break;
+			}
+		}
+		return bHasCollided;
+	}
+
+	bool WorldState::BulletCollWithEnemy(BulletData* pBullet)
+	{
+		bool bHasCollided = false;
+		for (unsigned int i = 0; i < m_Enemy.size(); i++)
+		{
+			EnemyData& currEnemy = m_Enemy[i];
+			//makes a vector from bullet to enemy
+			Vector2d enemyToBullet = pBullet->position - currEnemy.m_CurrentPosition;
+			//gets the distance of the vector
+			float distance = enemyToBullet.GetLength();
+			//returns true if bullet is less than 16 pixels of an enemy
+			bHasCollided = distance < 32.0f;
+			if (bHasCollided)
+			{
+				//runs a destroy func
+				currEnemy.OnHitByBullet(pBullet);
 				bHasCollided = true;
 				break;
 			}

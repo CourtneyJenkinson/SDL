@@ -35,4 +35,10 @@ void Bullet::Update(float deltaSeconds, WorldState& worldState, PlayerState& pla
 	{
 		m_pBulletData->bAlive = false;
 	}
+
+	if (worldState.BulletCollWithEnemy(m_pBulletData))
+	{
+		m_pBulletData->bAlive = false;
+	}
 }
+

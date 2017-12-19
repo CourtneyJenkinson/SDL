@@ -10,6 +10,9 @@ namespace DungeonGame
 	const float TILE_SIZE_W = 64.0f;
 	const float TILE_SIZE_H = 64.0f;
 
+	struct BulletData;
+
+
 	struct Vector2d
 	{
 		float X;
@@ -109,12 +112,11 @@ namespace DungeonGame
 	struct EnemyData
 	{
 		Vector2d m_CurrentPosition;
-		int m_Hp;
+		int EnemyHp;
 		bool bAlive;
-		std::vector<Vector2d> NavPoints; 
-		unsigned int CurrNavPointIndex;
 
 		//void hit by bullet
+		void OnHitByBullet(BulletData* pBullet);
 	};
 
 	struct BulletData
@@ -157,7 +159,11 @@ namespace DungeonGame
 
 		unsigned int GetTileTypeAtPosition(const Vector2d& inPosition);
 
+		
+		
 		bool BulletCollWithItem(BulletData* pBullet);
+
+		bool BulletCollWithEnemy(BulletData* pBullet);
 
 		//tile setup
 		unsigned int m_TilesPerRow;
