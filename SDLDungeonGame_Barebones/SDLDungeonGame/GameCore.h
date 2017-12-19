@@ -132,6 +132,8 @@ namespace DungeonGame
 	public:
 		void Initialize();
 		void Reset();
+		
+		bool EnemyToPlayerCollision(EnemyData* enemySprite);
 
 		bool ItemToPlayerCollision(ItemData* itemSprite);
 
@@ -141,6 +143,7 @@ namespace DungeonGame
 		Vector2d m_CurrentPosition;
 		Vector2d m_DesiredDirection;
 
+		bool m_bAlive;
 		int m_HP;
 
 		std::vector<ItemType> m_Inventory;

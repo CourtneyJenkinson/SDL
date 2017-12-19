@@ -37,6 +37,9 @@ void Hero::InitHero(SDL_Renderer* pRenderer)
 			 TryToShot(playerState);
 		 }
 	 }
+	 {
+		 m_bVisible = playerState.m_bAlive;
+	 }
 }
 
  void Hero::TryToShot(PlayerState& playerState)

@@ -24,14 +24,30 @@ using namespace DungeonGame;
 		m_Position = m_pEnemyData->m_CurrentPosition
 			+ Vector2d(m_Size.X * -0.5f, m_Size.Y * -0.5f);
 		m_bVisible = m_pEnemyData->EnemyHp > 0;
+		
+		{
+			m_Position = m_pEnemyData->m_CurrentPosition - m_Size * 0.5f;
+			m_bVisible = m_pEnemyData->bAlive;
+
+			//collider
+			if (m_pEnemyData->bAlive && playerState.EnemyToPlayerCollision(m_pEnemyData))
+			{
+				m_pEnemyData->bAlive = false;
+				playerState.m_HP--;
+				if (playerState.m_HP <= 0)
+				{
+					playerState.m_bAlive = false;
+				}
+			}
+		}
 
 		switch (m_pEnemyState)
 		{
 		case EnemyState_Idle:
 		{
 			Vector2d vectorToPlayer =
-				playerState.m_CurrentPosition - m_pEnemyData->m_CurrentPosition;
-			if (vectorToPlayer.GetLength() < 100.0f)
+				m_pEnemyData->m_CurrentPosition - playerState.m_CurrentPosition;
+			if (vectorToPlayer.GetLength() > 300.0f)
 			{
 				SetEnemyState(EnemyState_Agro);
 			}
@@ -43,8 +59,8 @@ using namespace DungeonGame;
 		case EnemyState_Agro:
 		{
 			Vector2d vectorToPlayer =
-				playerState.m_CurrentPosition - m_pEnemyData->m_CurrentPosition;
-			if (vectorToPlayer.GetLength() > 250.0f)
+				m_pEnemyData->m_CurrentPosition - playerState.m_CurrentPosition;
+			if (vectorToPlayer.GetLength() > 150.0f)
 			{
 				SetEnemyState(EnemyState_Return);
 			}

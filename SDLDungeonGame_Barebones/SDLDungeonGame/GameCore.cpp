@@ -39,7 +39,7 @@ namespace DungeonGame
 	{
 		//Set spawn point
 		m_CurrentPosition = Vector2d(2.0f * 64.0f, 1.0f * 64.0f);
-
+		m_bAlive = true;
 		m_HP = 5;
 
 		m_bWantsToShot = false;
@@ -53,6 +53,16 @@ namespace DungeonGame
 		Vector2d itemToPlayer = itemSprite->position - m_CurrentPosition;
 		//gets the distance of the vector
 		float distance = itemToPlayer.GetLength();
+		//returns turn if player is less than 16 pixels of an item
+		return distance < 64.0f;
+	}
+
+	bool PlayerState::EnemyToPlayerCollision(EnemyData* enemySprite)
+	{
+		//makes a vector from player to item
+		Vector2d enemyToPlayer = enemySprite->m_CurrentPosition - m_CurrentPosition;
+		//gets the distance of the vector
+		float distance = enemyToPlayer.GetLength();
 		//returns turn if player is less than 16 pixels of an item
 		return distance < 64.0f;
 	}
@@ -87,27 +97,153 @@ namespace DungeonGame
 
 		}; 
 
-
 		//Adds Item to list
-		ItemData item1 = {};
-		item1.bAlive = true;
-		item1.type = ITEM_Egg;
-		item1.position = Vector2d(3.0f *64.0f, 3.0f *64.0f);
-		m_Item.push_back(item1);
+		{
+			ItemData item1 = {};
+			item1.bAlive = true;
+			item1.type = ITEM_Egg;
+			item1.position = Vector2d(3.0f *64.0f, 3.0f *64.0f);
+			m_Item.push_back(item1);
 
-		ItemData item2 = {};
-		item2.type = ITEM_Egg;
-		item2.bAlive = true;
-		item2.position = Vector2d(4.0f *64.0f, 3.0f *64.0f);
-		m_Item.push_back(item2);
+			ItemData item2 = {};
+			item2.type = ITEM_Egg;
+			item2.bAlive = true;
+			item2.position = Vector2d(4.0f *64.0f, 3.0f *64.0f);
+			m_Item.push_back(item2);
+
+			ItemData item3 = {};
+			item3.type = ITEM_Egg;
+			item3.bAlive = true;
+			item3.position = Vector2d(16.0f *64.0f, 6.0f *64.0f);
+			m_Item.push_back(item3);
+
+			ItemData item4 = {};
+			item4.type = ITEM_Egg;
+			item4.bAlive = true;
+			item4.position = Vector2d(16.0f *64.0f, 5.0f *64.0f);
+			m_Item.push_back(item4);
+
+			ItemData item5 = {};
+			item5.type = ITEM_Egg;
+			item5.bAlive = true;
+			item5.position = Vector2d(17.0f *64.0f, 5.0f *64.0f);
+			m_Item.push_back(item5);
+
+			ItemData item6 = {};
+			item6.type = ITEM_Egg;
+			item6.bAlive = true;
+			item6.position = Vector2d(34.0f *64.0f, 2.0f *64.0f);
+			m_Item.push_back(item6);
+
+			ItemData item7 = {};
+			item7.type = ITEM_Egg;
+			item7.bAlive = true;
+			item7.position = Vector2d(44.0f *64.0f, 2.0f *64.0f);
+			m_Item.push_back(item7);
+
+			ItemData item8 = {};
+			item8.type = ITEM_Egg;
+			item8.bAlive = true;
+			item8.position = Vector2d(45.0f *64.0f, 2.0f *64.0f);
+			m_Item.push_back(item8);
+
+			ItemData item9 = {};
+			item9.type = ITEM_Egg;
+			item9.bAlive = true;
+			item9.position = Vector2d(46.0f *64.0f, 2.0f *64.0f);
+			m_Item.push_back(item9);
+
+			ItemData item10 = {};
+			item10.type = ITEM_Egg;
+			item10.bAlive = true;
+			item10.position = Vector2d(46.0f *64.0f, 3.0f *64.0f);
+			m_Item.push_back(item10);
+
+			ItemData item11 = {};
+			item11.type = ITEM_Egg;
+			item11.bAlive = true;
+			item11.position = Vector2d(45.0f *64.0f, 3.0f *64.0f);
+			m_Item.push_back(item11);
+
+			ItemData item12 = {};
+			item12.type = ITEM_Egg;
+			item12.bAlive = true;
+			item12.position = Vector2d(29.0f *64.0f, 11.0f *64.0f);
+			m_Item.push_back(item12);
+
+			ItemData item13 = {};
+			item13.type = ITEM_Egg;
+			item13.bAlive = true;
+			item13.position = Vector2d(28.0f *64.0f, 11.0f *64.0f);
+			m_Item.push_back(item13);
+
+			ItemData item14 = {};
+			item14.type = ITEM_Egg;
+			item14.bAlive = true;
+			item14.position = Vector2d(28.0f *64.0f, 12.0f *64.0f);
+			m_Item.push_back(item14);
+
+			ItemData item15 = {};
+			item15.type = ITEM_Egg;
+			item15.bAlive = true;
+			item15.position = Vector2d(17.0f *64.0f, 13.0f *64.0f);
+			m_Item.push_back(item15);
+
+			ItemData item16 = {};
+			item16.type = ITEM_Egg;
+			item16.bAlive = true;
+			item16.position = Vector2d(16.0f *64.0f, 13.0f *64.0f);
+			m_Item.push_back(item16);
+
+			ItemData item17 = {};
+			item17.type = ITEM_Egg;
+			item17.bAlive = true;
+			item17.position = Vector2d(16.0f *64.0f, 12.0f *64.0f);
+			m_Item.push_back(item17);
+		}
 
 			//Adds Enemy to list
-		EnemyData enemy1 = {};
-		enemy1.bAlive = true;
-		enemy1.EnemyHp = 3;
-		enemy1.m_CurrentPosition = Vector2d(5.0f *64.0f, 3.0f *64.0f);
-		//enemy1.NavPoints.push_back(5.0f *64.0f, 1.0f *64.0f);
-		m_Enemy.push_back(enemy1);
+		{
+			EnemyData enemy1 = {};
+			enemy1.bAlive = true;
+			enemy1.EnemyHp = 3;
+			enemy1.m_CurrentPosition = Vector2d(10.0f *64.0f, 3.0f *64.0f);
+			//enemy1.NavPoints.push_back(5.0f *64.0f, 1.0f *64.0f);
+			m_Enemy.push_back(enemy1);
+
+			EnemyData enemy2 = {};
+			enemy2.bAlive = true;
+			enemy2.EnemyHp = 3;
+			enemy2.m_CurrentPosition = Vector2d(20.0f *64.0f, 12.0f *64.0f);
+			m_Enemy.push_back(enemy2);
+
+			EnemyData enemy3 = {};
+			enemy3.bAlive = true;
+			enemy3.EnemyHp = 3;
+			enemy3.m_CurrentPosition = Vector2d(29.0f *64.0f, 11.0f *64.0f);
+			m_Enemy.push_back(enemy3);
+
+			EnemyData enemy4 = {};
+			enemy4.bAlive = true;
+			enemy4.EnemyHp = 3;
+			enemy4.m_CurrentPosition = Vector2d(3.0f *64.0f, 15.0f *64.0f);
+			m_Enemy.push_back(enemy4);
+
+			EnemyData enemy5 = {};
+			enemy5.bAlive = true;
+			enemy5.EnemyHp = 3;
+			enemy5.m_CurrentPosition = Vector2d(29.0f *64.0f, 16.0f *64.0f);
+			m_Enemy.push_back(enemy5);
+
+
+			EnemyData enemy6 = {};
+			enemy6.bAlive = true;
+			enemy6.EnemyHp = 3;
+			enemy6.m_CurrentPosition = Vector2d(37.0f *64.0f, 16.0f *64.0f);
+			m_Enemy.push_back(enemy6);
+		}
+
+
 
 		Reset();
 	}
@@ -294,6 +430,12 @@ namespace DungeonGame
 			g_spriteList[i]->Update(deltaSeconds, worldState, playerState);
 		}
 		cameraPosition = Vector2d(WINDOW_WIDTH * 0.5f, WINDOW_HEIGHT * 0.5f) - playerState.m_CurrentPosition;
+
+		//WIN CONDITION
+		if (playerState.m_Inventory.size() >= 17)
+		{
+			exit(15);
+		}
 	}
 
 	void RenderGame(SDL_Renderer* pRenderer, const WorldState& worldState, const PlayerState& playerState)
